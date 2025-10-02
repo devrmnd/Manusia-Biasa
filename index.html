@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Milik Saya</title>
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --background: #F3F4F6;
+            --foreground: #1F2937;
+            --muted: #9CA3AF;
+            --border: #E5E7EB;
+            --card: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--foreground);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            padding: 3rem 0;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2563EB;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #059669;
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .section-title p {
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill {
+            background-color: var(--card);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background-color: var(--card);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--foreground);
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .social-link.whatsapp:hover {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .contact-form {
+            background-color: var(--card);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--card);
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content, .hero-image {
+                flex: none;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Nama Anda</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#projects">Proyek</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hai, Saya Dheva Armanda Rizqi</h1>
+                <p>Saya seorang siswa yang ada di SMKN1 Sooko yang mengambil jurusan Desain Komunikasi Visual saya kelas 11, hobi saya basket sama karate saya suka itu dikarenakan berolahraga seru juga hehe:).</p>
+                <div>
+                    <a href="#contact" class="btn">Hubungi Saya</a>
+                    <a href="#projects" class="btn btn-secondary">Lihat Proyek</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://placeholder-image-service.onrender.com/image/400x400?prompt=Professional portrait of a web developer smiling&id=3b7c4a1d-9a2f-4e5d-b8c3-6d9e8f0a1b2c" alt="Professional portrait of a web developer smiling confidently">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Saya</h2>
+                <p>Mari berkenalan lebih dekat dengan saya dan keahlian yang saya miliki</p>
+            </div>
+            <div class="about-content">
+                <div>
+                    <img src="https://placeholder-image-service.onrender.com/image/500x400?prompt=Developer working on laptop in modern workspace&id=5c8d3e2f-1a4b-4c7d-9e6f-0a1b2c3d4e5f" alt="Developer working on laptop in a modern workspace environment">
+                </div>
+                <div>
+                    <h3>Web Developer Berpengalaman</h3>
+                    <p>Saya telah berkecimpung dalam dunia web development selama beberapa tahun. Saya memiliki passion dalam menciptakan pengalaman digital yang menyenangkan dan mudah digunakan bagi pengguna.</p>
+                    <p>Dengan keahlian dalam HTML, CSS, JavaScript, dan berbagai framework modern, saya siap membantu mewujudkan ide-ide kreatif menjadi kenyataan digital.</p>
+                    <div class="skills">
+                        <span class="skill">HTML</span>
+                        <span class="skill">CSS</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">React</span>
+                        <span class="skill">Responsive Design</span>
+                        <span class="skill">UI/UX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyek Terbaru</h2>
+                <p>Beberapa karya terbaru yang telah saya selesaikan</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=E-commerce website with modern design and product showcase&id=7d9e8f0a-1b2c-3d4e-5f6a-7b8c9d0e1f2a" alt="Modern e-commerce website design with product showcase and clean layout">
+                    </div>
+                    <div class="project-content">
+                        <h3>Website E-commerce</h3>
+                        <p>Website toko online dengan desain modern dan fitur lengkap untuk penjualan produk.</p>
+                        <a href="#" class="btn">Lihat Detail</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Portfolio website with dark theme and project gallery&id=8c9d0e1f-2a3b-4c5d-6e7f-8a9b0c1d2e3f" alt="Portfolio website with dark theme showcasing various projects in a gallery layout">
+                    </div>
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+                        <p>Website portfolio dengan tema gelap yang menampilkan berbagai karya kreatif.</p>
+                        <a href="#" class="btn">Lihat Detail</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://placeholder-image-service.onrender.com/image/400x300?prompt=Blog website with article listings and clean typography&id=9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e" alt="Blog website with clean article listings and beautiful typography design">
+                    </div>
+                    <div class="project-content">
+                        <h3>Blog Platform</h3>
+                        <p>Platform blog dengan antarmuka yang bersih dan fokus pada keterbacaan konten.</p>
+                        <a href="#" class="btn">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hubungi Saya</h2>
+                <p>Jangan ragu untuk menghubungi saya untuk kolaborasi atau pertanyaan</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Informasi Kontak</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>email@anda.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Telepon</h4>
+                            <p>+62 812 3456 7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Lokasi</h4>
+                            <p>Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://instagram.com/username_anda" class="social-link instagram" target="_blank">📷</a>
+                        <a href="https://wa.me/6281234567890" class="social-link whatsapp" target="_blank">💬</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Kirim Pesan</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Nama Anda</div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">Tentang</a>
+                    <a href="#projects">Proyek</a>
+                    <a href="#contact">Kontak</a>
+                </div>
+                <p class="copyright">© 2023 Nama Anda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Contact Form Handling
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Basic validation
+                if (!name || !email || !message) {
+                    alert('Harap isi semua field yang diperlukan');
+                    return;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Harap masukkan alamat email yang valid');
+                    return;
+                }
+                
+                // Simulate form submission
+                alert(`Terima kasih ${name}! Pesan Anda telah terkirim. Saya akan membalas ke ${email} segera.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+        }
+
+        // WhatsApp integration
+        function openWhatsApp() {
+            const phoneNumber = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+            const message = "Halo, saya tertarik dengan layanan Anda!";
+            const whatsappURL = `https://api.whatsapp.com/send/?phone=6289510529209&text&type=phone_number&app_absent=0`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Instagram integration
+        function openInstagram() {
+            const username = "username_anda"; // Ganti dengan username Instagram Anda
+            const instagramURL = `https://instagram.com/devrmnd`;
+            window.open(instagramURL, '_blank');
+        }
+    </script>
+</body>
+</html>
